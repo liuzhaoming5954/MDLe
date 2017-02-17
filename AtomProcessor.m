@@ -7,12 +7,20 @@ load('sqtraj1.mat');
 % sigmao = [1,1,1,1,1;2,1,1,2,1];
 
 % 输入ur和dt；
-ur = sqtraj1(:,2);
+ur = sqtraj1(:,3);
 % ur = qc(:,1);
 dt = 0.04; 
 % dt = 0.01; 
 % 获取初始字母表sigmao
-sigmao = InitSigmao(ur,dt);
+[sigmao, str_line] = InitSigmao(ur,dt);
+
+% TODO
+if(str_line = 1)
+    %如果是直线就直接输出
+else
+    %不是直线则有下面的一堆重构
+end
+
 
 t = (0:dt:dt*(length(ur)-1))';
 eps = 0.005;
