@@ -1,9 +1,10 @@
 function [sigmao, str_line] = InitSigmao(ur, dt)
 % INPUT 
-% 参考输入ur
-% 采样时间间隔dt同参考输入ur
+% 参考输入信号：ur
+% 采样时间间隔：dt同参考输入ur
 % OUTPUT
 % 输出初始化的sigmao矩阵
+% 直线标志：str_line 1表示参考信号为直线，0表示参考信号不是直线
 
 % 初始化相关参数
 L = length(ur);
@@ -41,7 +42,6 @@ else
     % Cubic trajectory function 三次曲线
     sigmao(i,:) = a_c(1)+a_c(2)*t1+a_c(3)*t1.^2+a_c(4)*t1.^3;
     i = i+1;
-    
     
     a_p = polyfit(ur,t1,5);
     % Polynomial_5 trajectory function 五次曲线

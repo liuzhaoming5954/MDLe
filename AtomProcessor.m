@@ -12,20 +12,20 @@ dt = 0.04;
 % 获取初始字母表sigmao
 [sigmao, str_line] = InitSigmao(ur,dt);
 
-
-
+% 设置运行时间
 t = (0:dt:dt*(length(ur)-1))';
+% 设置允许误差
 eps = 0.005;
 eps1 = 0.0005;
-
+% 分段输入信号
 [ui, s] = Segmentation(ur, dt, eps);
+% 对输入信号进行延拓
 [us, sigmas, B, Ts] = Scaling(ui, sigmao, s, dt);
 
 [j, mk] = size(sigmas);
 [n, mk] = size(us);
 
-
-% TODO
+% 根据输入是否为直线分两种情况构建和重建
 if(str_line == 1)
     %如果是直线就直接输出
     u_re = sigmas;
@@ -107,7 +107,6 @@ else
     end
     %ts = [0,ts];
 end
-
 
 
 % 显示重构信号
